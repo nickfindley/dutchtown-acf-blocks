@@ -22,14 +22,24 @@ endif;
 
 <div class="<?php echo $item_class; ?>">
 <?php
-if ( $image ) :
+if ( $style == 'flora-black' || $style == 'flora-yellow' ) :
 ?>
-    <?php echo wp_get_attachment_image( $image, 'xs', false, array( 'class' => 'card-img-top' ) ) . "\n"; ?>
+    <div class="card-flora-crown"></div>
 <?php
 endif;
 ?>
-    <div class="card-body">
-        <h3 class="card-title">
+    <div class="card-inner">
+<?php
+if ( $image ) :
+?>
+        <div class="card-image">
+            <?php echo wp_get_attachment_image( $image, 'xs', false, array( 'class' => 'card-img-top' ) ) . "\n"; ?>
+        </div>
+<?php
+endif;
+?>
+        <div class="card-body">
+            <h3 class="card-title">
 <?php
 if ( $title_link ) :
     $link_class = '';
@@ -37,27 +47,28 @@ if ( $title_link ) :
         $link_class = ' class="stretched-link"';
     endif;
 ?>
-            <a href="<?php echo $title_link; ?>"<?php echo $link_class; ?>>
-                <?php echo $title; ?>
-            </a>
+                <a href="<?php echo $title_link; ?>"<?php echo $link_class; ?>>
+                    <?php echo $title; ?>
+                </a>
 <?php
 else :
 ?>
-            <?php echo $title; ?>
+                <?php echo $title; ?>
 <?php
 endif;
 ?>
-        </h3>
+            </h3>
 
         <?php echo $body; ?>
-    </div>
+        </div>
 <?php
 if ( $footer ) :
 ?>
-    <div class="card-footer">
-        <?php echo $footer; ?>
-    </div>
+        <div class="card-footer">
+            <?php echo $footer; ?>
+        </div>
 <?php
 endif;
 ?>
+    </div>
 </div>

@@ -11,7 +11,7 @@ if ( function_exists( 'acf_register_block_type' ) ) :
             'mode' => 'preview',
             'keywords' => array( 'dutchtown', 'flickity', 'carousel', 'events' ),
             'render_template' => dutchtown_acf_blocks_dir() . 'block-templates/block-flickity-events.php',
-            'enqueue_style' => plugin_dir_url( __DIR__ ) . 'css/flickity.css',
+            'enqueue_style' => plugin_dir_url( __DIR__ ) . 'css/flickity-events/flickity-events.css',
             'enqueue_script' => plugin_dir_url( __DIR__ ) . 'js/flickity.min.js',
             'supports' => array( 'align' => false, 'jsx' => true )
             )

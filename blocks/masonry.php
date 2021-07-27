@@ -12,6 +12,7 @@ if ( function_exists( 'acf_register_block_type' ) ) :
             'keywords' => array( 'dutchtown', 'masonry', 'container' ),
             'render_template' => dutchtown_acf_blocks_dir() . 'block-templates/block-masonry.php',
             'enqueue_script' => plugin_dir_url( __DIR__ ) . 'js/masonry.min.js',
+            'enqueue_style' => plugin_dir_url( __DIR__ ) . 'css/masonry/masonry.css',
             'supports' => array( 'align' => false, 'jsx' => true )
             )
         );
@@ -41,7 +42,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
                 'collapsed' => 'field_60f96a0d7cafc',
                 'min' => 0,
                 'max' => 0,
-                'layout' => 'block',
+                'layout' => 'row',
                 'button_label' => '',
                 'sub_fields' => array(
                     array(

@@ -1,0 +1,36 @@
+body {
+    .editor-styles-wrapper {
+        font-family: 'avenir';
+        font-size: 16px;
+    }
+
+    .acf-repeater .acf-row:nth-child(odd) .acf-row-handle.order {
+        background: #cfcfcf;
+    }
+
+    .acf-repeater .acf-row:nth-child(even) .acf-row-handle.order {
+        background: #7c7c7c;
+    }
+
+    .flickity {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .flickity-event {
+        width: 100%;
+
+        .article-meta {
+            text-align: center;
+        }
+    }
+
+    .masonry-container {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .masonry {
+        width: 100%;
+    }
+}

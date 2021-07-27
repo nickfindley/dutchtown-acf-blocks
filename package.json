@@ -1,0 +1,29 @@
+{
+  "name": "dutchtown-acf-blocks",
+  "version": "1.0.0",
+  "description": "ACF Blocks for DutchtownSTL.org",
+  "main": "gulpfile.js",
+  "keywords": [
+    "gulp",
+    "dutchtown"
+  ],
+  "author": "Nick Findley",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "autoprefixer": "^10.2.6",
+    "cssnano": "^5.0.6",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-replace": "^1.1.3",
+    "gulp-sass": "^5.0.0",
+    "gulp-terser": "^2.0.1",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^1.0.4",
+    "postcss": "^8.3.5",
+    "sass": "^1.35.2",
+    "gulp-cli": "^2.3.0",
+    "node-sass": "^4.13.0"
+  }
+}

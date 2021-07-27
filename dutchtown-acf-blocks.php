@@ -13,14 +13,27 @@ function dutchtown_acf_blocks_dir()
 
 require plugin_dir_path( __FILE__ ) . 'blocks/callout-box.php';
 require plugin_dir_path( __FILE__ ) . 'blocks/cards.php';
-require plugin_dir_path( __FILE__ ) . 'blocks/chartjs.php';
-require plugin_dir_path( __FILE__ ) . 'blocks/chartjs-bar.php';
-require plugin_dir_path( __FILE__ ) . 'blocks/chartjs-line.php';
 require plugin_dir_path( __FILE__ ) . 'blocks/flickity-events.php';
 require plugin_dir_path( __FILE__ ) . 'blocks/follow.php';
 require plugin_dir_path( __FILE__ ) . 'blocks/masonry.php';
 require plugin_dir_path( __FILE__ ) . 'blocks/news.php';
 require plugin_dir_path( __FILE__ ) . 'blocks/quick-contact.php';
+
+add_action( 'enqueue_block_editor_assets', 'misha_custom_block' );
+
+function misha_custom_block(){
+
+	// wp_enqueue_script() with your block JS goes first...
+	
+	// block css
+	wp_enqueue_style(
+		'misha-block-css',
+		plugins_url( 'css/editor/editor.css', __FILE__ ),
+		array( 'wp-edit-blocks' ),
+		time()
+	);
+
+}
 
 function dutchtown_icon()
 {

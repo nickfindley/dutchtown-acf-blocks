@@ -22,9 +22,9 @@ $number = get_field( 'number_of_events' );
         'posts_per_page' => $number,
         'post_type' => array( Tribe__Events__Main::POSTTYPE ),
         'eventDisplay' => 'list',
-        'meta_key'=>'_EventStartDate',
-        'orderby'=>'_EventStartDate',
-        'order'=>'ASC',
+        'meta_key' => '_EventStartDate',
+        'orderby' => '_EventStartDate',
+        'order' => 'ASC',
         'tribeHideRecurrence' => true,
     );
     $posts_query = new WP_Query( $args );

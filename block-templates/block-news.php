@@ -1,84 +1,80 @@
 <?php
-$block_id = 'news-' . $block['id'];
-$block_classes = 'news';
+$block_classes = '';
 
 if ( ! empty( $block['className'] ) ) :
     $block_classes .= ' ' . $block['className'];
 endif;
 
-$title = get_field( 'title' );
-$body = get_field( 'body' );
-$more = get_field( 'more' );
-$url = get_field( 'posts_url' );
-$number = get_field( 'number_of_posts' );
-?>
+$title =        get_field( 'title' );
+$body =         get_field( 'body' );
+$more =         get_field( 'more' );
+$url =          get_field( 'posts_url' );
+$number =       get_field( 'number_of_posts' );
+$categories =   get_field( 'categories' );
+$style =        get_field( 'style' );
+$excerpts =     get_field( 'excerpts' );
 
-<section id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $block_classes ); ?>">
-    <header>
-        <h2><a href="<?php echo $url; ?>"><?php echo $title; ?></a></h2>
-<?php
-    if ( $body ) :
-?>
-      <p><?php echo $body; ?></p>
-<?php
-    endif;
-?>
-    </header>
-<?php
+if ( $style == 'full' ) :
+    require ( 'template-parts/block-news-full-header.php' );
+else :
+    require ( 'template-parts/block-news-compact-header.php' );
+endif;
+switch_to_blog( 1 );
+
+if ( $categories ) :
     $args = array(
         'posts_per_page' => $number,
+        'category__in' => $categories
     );
-    $posts_query = new WP_Query( $args );
-    
-    if ( $posts_query->have_posts() ) :
-        while ( $posts_query->have_posts() ) :
-            $posts_query->the_post();
-            if ( has_post_thumbnail() ) :
-?>
-    <article class="has-featured-image">
-<?php
-            else :
-?>
-    <article>
-<?php
-            endif;
-?>
-        <header class="article-header">
-            <h3>
-                <a href="<?php the_permalink(); ?>">
-                    <?php the_title(); ?>
-                </a>
-            </h3>
+else :
+    $args = array(
+        'posts_per_page' => $number
+    );
+endif;
 
-            <section class="article-meta">
-                <p><?php dutchtown_posted_on(); ?></p>
-            </section>
-        </header>       
-<?php
-            if ( has_post_thumbnail() ) :
-?>
-        <div class="post-thumbnail">
-            <?php the_post_thumbnail(); ?>
-        </div>
-<?php
-            endif;
-?>
+$posts_query = new WP_Query( $args );
 
-        <div class="article-content">
-            <?php the_excerpt(); ?>
-        </div>
-    </article>
-<?php
-        endwhile;
-        wp_reset_postdata();
-    endif;
-
-    if ( $more ) :
-?>
-    <p>
-        <?php echo $more; ?>
-    </p>
-<?php
-    endif;
+if ( $posts_query->have_posts() ) :
+    if ( $style == 'full' ) :
+        // close container-page-content
 ?>
 </section>
+<section class="news-full">
+<?php
+    endif;
+
+    while ( $posts_query->have_posts() ) :
+        $posts_query->the_post();
+
+        if ( $style == 'full' ) :
+            require( 'template-parts/block-news-full.php' );
+        else :
+            require( 'template-parts/block-news-compact.php' );
+        endif;
+    endwhile;
+    wp_reset_postdata();
+
+    if ( $style == 'full' ) :
+        // reopen container-page-content
+?>
+</section>
+<section class="container container-page-content">
+<?php
+    endif;
+endif;
+
+if ( $more ) :
+?>
+    <section class="news-more">
+        <?php echo $more; ?>
+    </section>
+<?php
+endif;
+
+restore_current_blog();
+
+if ( $style != 'full' ) :
+?>
+</section>
+<?php
+endif;
