@@ -41,9 +41,14 @@
             max-width: calc(var(--container-md-width) - var(--paragraph-margin-bottom));
         }
 
-        h2 {
+        h1, h2 {
             color: rgba(var(--primary-rgb), .875);
-            margin-bottom: 0;
+
+            &[id] {
+                margin-top: 0;
+                padding-top: 0;
+                z-index: auto;
+            }
         }
 
         p {

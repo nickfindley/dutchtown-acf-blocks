@@ -1,57 +1,68 @@
 <?php
-$id = 'callout-box-' . $block['id'];
-if ( ! empty( $block['anchor'])  ) :
-    $id = $block['anchor'];
-endif;
+$title =        get_field( 'title' );
+$subtitle =     get_field( 'subtitle' );
+$title_link =   get_field( 'title_link' );
+$stretched =    get_field( 'title_link_stretched' );
+$body =         get_field( 'body' );
+$style =        get_field( 'style' );
+$align_box =    get_field( 'align_box' );
+$align_text =   get_field( 'align-text');
 
 $block_classes = 'callout-box';
+
 if ( ! empty( $block['class_name'] ) ) :
     $block_classes .= ' ' . $block['class_name'];
 endif;
 
-if ( ! empty( $block['align'] ) ) :
-    $block_classes .= ' align-' . $block['align'];
-endif;
-
-if ( get_field( 'color_scheme' ) == 'black_yellow' ) :
+if ( ! $style ) :
     $block_classes .= ' black-yellow';
 else :
-    $block_classes .= ' yellow-black';
+    $block_classes .= ' ' . $style;
 endif;
 
-$title = get_field( 'title' );
-$title_link = get_field( 'title_link' );
-$body = get_field( 'body' );
+if ( ! $align_box ) :
+    $block_classes .= ' align-right';
+else:
+    $block_classes .= ' ' . $align_box;
+endif;
+
+if ( ! $align_text ) :
+    $block_classes .= ' align-text-left';
+else:
+    $block_classes .= ' ' . $align_text;
+endif;
 ?>
 
 <div class="<?php echo $block_classes; ?>">
     <h4>
-    <?php
-        if ( $title_link ) :
-            if ( get_field( 'title_link_stretched' ) ) :
-    ?>
+<?php
+if ( $title_link ) :
+    if ( $title_link_stretched == 1 ) :
+?>
         <a class="stretched-link" href="<?php echo $title_link; ?>">
-    <?php
-            else :
-    ?>
+<?php
+    else :
+?>
         <a href="<?php echo $title_link; ?>">
-    <?php
-            endif;
-        endif;
-        
-        echo $title;
+<?php
+    endif;
+endif;
 
-        if ( get_field( 'subtitle' ) ) :
-            echo '<span class="subtitle">' . get_field( 'subtitle' ) . '</span>';
-        endif;
-        
-        if ( $title_link ) :
-    ?>
+echo $title;
+
+if ( $subtitle ) :
+?>
+        <span class="subheading"><?php echo $subtitle; ?></span>
+<?php
+endif;
+
+if ( $title_link ) :
+?>
         </a>
-    <?php
-        endif;
-    ?>
+<?php
+endif;
+?>
     </h4>
-    
+      
     <?php echo $body; ?>
 </div>

@@ -10,7 +10,7 @@ if ( function_exists( 'acf_register_block_type' ) ) :
             'category'          => 'formatting',
             'icon'              => dutchtown_icon(),
             'keywords'          => array( 'news', 'blog', 'posts' ),
-            'enqueue_style' => plugin_dir_url( __DIR__ ) . 'css/news/news.css',
+            'enqueue_style'     => plugin_dir_url( __DIR__ ) . 'css/news/news.css',
             'supports'          => array ('align' => false, 'jsx' => true ),
             'mode'              => 'preview'
         ));

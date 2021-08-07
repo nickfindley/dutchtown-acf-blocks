@@ -4,7 +4,7 @@
 <?php
 if ( $url ) :
 ?>
-            <a href="<?php echo $url; ?>"><?php echo $title; ?></a><
+            <a href="<?php echo $url; ?>"><?php echo $title; ?></a>
 <?php
 else :
 ?>
@@ -20,4 +20,5 @@ if ( $body ) :
 <?php
 endif;
 ?>
+        <!-- <InnerBlocks /> -->
     </header>

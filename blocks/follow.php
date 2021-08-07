@@ -9,6 +9,7 @@ if ( function_exists( 'acf_register_block_type' ) ) :
             'render_template'   => dutchtown_acf_blocks_dir() . 'block-templates/block-follow.php',
             'category'          => 'formatting',
             'icon'              => dutchtown_icon(),
+            'enqueue_style' => plugin_dir_url( __DIR__ ) . 'css/follow/follow.css',
             'keywords'          => array( 'follow', 'social' ),
             'supports'          => array ('align' => false ),
             'mode'              => 'edit'
