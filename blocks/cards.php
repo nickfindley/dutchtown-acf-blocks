@@ -4,8 +4,8 @@ if ( function_exists( 'acf_register_block_type' ) ) :
     {
         acf_register_block_type( array(
             'name'              => 'dutchtown_cards',
-            'title'             => __('Dutchtown Cards'),
-            'description'       => __('Create card and people grids.'),
+            'title'             => 'Dutchtown Cards',
+            'description'       => 'Create card and people grids.',
             'render_template'  => dutchtown_acf_blocks_dir() . 'block-templates/block-cards.php',
             'category'          => 'formatting',
             'icon'              => dutchtown_icon(),

@@ -4,8 +4,8 @@ if ( function_exists( 'acf_register_block_type' ) ) :
     {
         acf_register_block_type( array(
             'name'              => 'dutchtown_callout_box',
-            'title'             => __('Dutchtown Callout Box'),
-            'description'       => __('At box to display prominent info.'),
+            'title'             => 'Dutchtown Callout Box',
+            'description'       => 'At box to display prominent info.',
             'render_template'   => dutchtown_acf_blocks_dir() . 'block-templates/block-callout-box.php',
             'category'          => 'formatting',
             'icon'              => dutchtown_icon(),

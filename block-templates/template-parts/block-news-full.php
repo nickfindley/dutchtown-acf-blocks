@@ -1,72 +1,71 @@
-<article>
+<header>
+    <h2>
 <?php
-if ( has_post_thumbnail() ) :
+if ( $url ) :
 ?>
-    <header class="article-header has-featured-image">
-        <div class="container">
-            <div class="post-thumbnail">
-                <?php the_post_thumbnail( '', ['class' => 'no-lazyload'] ); ?>
-            </div>
+        <a href="<?php echo $url; ?>"><?php echo $title; ?></a>
 <?php
 else :
 ?>
-    <header class="article-header">
-        <div class="container">
+        <?php echo $title; ?>
 <?php
 endif;
 ?>
-            <h1>
-                <a href="<?php the_permalink(); ?>">
-                    <?php the_title(); ?>
-                </a>
-            </h1>
-
-            <section class="article-meta">
-                <p><?php dutchtown_posted_on(); ?></p>
-            </section>
-
-            <section class="article-sharing">
+    </h2>
 <?php
-                dutchtown_facebook_link();
-                dutchtown_twitter_link();
-                dutchtown_mailto_link();
+if ( $body ) :
 ?>
-            </section>
-        </div>
-    </header>
+        <?php echo $body; ?>
+<?php
+endif;
+?>
+</header>
+<?php
+switch_to_blog( 1 );
 
-    <section class="container container-article-content">
-<?php 
-if ( $excerpts == 1 ) :
-    the_excerpt();
+if ( $categories ) :
+    $args = array(
+        'posts_per_page' => $number,
+        'category__in' => $categories
+    );
 else :
-    the_content();
+    $args = array(
+        'posts_per_page' => $number
+    );
 endif;
+
+$posts_query = new WP_Query( $args );
+
+if ( $posts_query->have_posts() ) :
+    // close container-page-content
 ?>
+</section>
+
+<section class="news-full">
+<?php
+endif;
+
+while ( $posts_query->have_posts() ) :
+    $posts_query->the_post();
+    require( 'block-news-full-post.php' );
+endwhile;
+wp_reset_postdata();
+
+if ( $style == 'full' ) :
+    // reopen container-page-content
+?>
+</section>
+
+<section class="container container-page-content">
+<?php
+endif;
+
+if ( $more ) :
+?>
+    <section class="news-more">
+        <?php echo $more; ?>
     </section>
-
-    <footer class="article-footer">
-<?php
-if ( has_category() || dutchtown_is_updated() ) :
-?>
-        <p>
-<?php
-    if ( has_category() ) :
-        $category = get_primary_taxonomy_term();
-?>
-            Filed under <a href="<?php echo $category['url']; ?>"><?php echo $category['title']; ?></a>.
-<?php
-    endif;
-
-    if ( dutchtown_is_updated() ) :
-?>
-            This post was last updated on <?php dutchtown_updated_on(); ?>.
-<?php
-    endif;
-?>
-        </p>
 <?php
 endif;
-?>
-    </footer>
-</article>
+
+restore_current_blog();

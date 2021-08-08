@@ -4,8 +4,8 @@ if ( function_exists( 'acf_register_block_type' ) ) :
     {
         acf_register_block_type( array(
             'name'              => 'dutchtown_quick_contact',
-            'title'             => __('Dutchtown Quick Contact'),
-            'description'       => __('At a glance contact info.'),
+            'title'             => 'Dutchtown Quick Contact',
+            'description'       => 'At a glance contact info.',
             'render_template'   => dutchtown_acf_blocks_dir() . 'block-templates/block-quick-contact.php',
             'category'          => 'formatting',
             'icon'              => dutchtown_icon(),

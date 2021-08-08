@@ -1,36 +1,56 @@
+<section class="news-compact<?php echo esc_attr( $block_classes ); ?>">
+    <header>
+        <h2>
 <?php
-if ( has_post_thumbnail() ) :
+if ( $url ) :
 ?>
-<article class="has-featured-image">
+            <a href="<?php echo $url; ?>"><?php echo $title; ?></a>
 <?php
 else :
 ?>
-<article>
+            <?php echo $title; ?>
 <?php
 endif;
 ?>
-    <header class="article-header">
-        <h3>
-            <a href="<?php the_permalink(); ?>">
-                <?php the_title(); ?>
-            </a>
-        </h3>
-
-        <section class="article-meta">
-            <p><?php dutchtown_posted_on(); ?></p>
-        </section>
-    </header>       
+        </h2>
 <?php
-if ( has_post_thumbnail() ) :
+if ( $body ) :
 ?>
-    <div class="post-thumbnail">
-        <?php the_post_thumbnail(); ?>
-    </div>
+        <?php echo $body; ?>
 <?php
 endif;
 ?>
+    </header>
+<?php
+if ( $categories ) :
+    $args = array(
+        'posts_per_page' => $number,
+        'category__in' => $categories
+    );
+else :
+    $args = array(
+        'posts_per_page' => $number
+    );
+endif;
 
-    <div class="article-content">
-        <?php the_excerpt(); ?>
-    </div>
-</article>
+$posts_query = new WP_Query( $args );
+
+if ( $posts_query->have_posts() ) :
+    while ( $posts_query->have_posts() ) :
+        $posts_query->the_post();
+        require( 'block-news-compact-post.php' );
+    endwhile;
+    wp_reset_postdata();
+endif;
+
+if ( $more ) :
+?>
+    <section class="news-more">
+        <?php echo $more; ?>
+    </section>
+<?php
+endif;
+
+restore_current_blog();
+?>
+</section>
